@@ -1,4 +1,4 @@
 module-info.class
+ec\edu\uees\spotifyapp\LoadingThread.class
+ec\edu\uees\spotifyapp\LoadingController.class
 ec\edu\uees\spotifyapp\App.class
-ec\edu\uees\spotifyapp\SecondaryController.class
-ec\edu\uees\spotifyapp\PrimaryController.class
