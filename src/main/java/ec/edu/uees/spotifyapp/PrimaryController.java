@@ -10,14 +10,7 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            Thread.sleep(1500);
-            App.setRoot("login");
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        
         
     }
 }
