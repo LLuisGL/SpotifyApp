@@ -19,13 +19,6 @@ public class LoadingController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         LoadingThread t1 = new LoadingThread();
         t1.start();
-        ScaleTransition scale = new ScaleTransition();
-        scale.setNode(loadingImage);
-        scale.setDuration(Duration.millis(1000));
-        scale.setInterpolator(Interpolator.LINEAR);
-        scale.setByX(1.0);
-        scale.setByY(1.0);
-        scale.play();
     }
     
 }

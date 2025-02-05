@@ -1,4 +1,7 @@
-module-info.class
+ListaCircular\Lista.class
 ec\edu\uees\spotifyapp\LoadingThread.class
+ListaCircular\DoubleLinkedCircleList$Node.class
 ec\edu\uees\spotifyapp\LoadingController.class
 ec\edu\uees\spotifyapp\App.class
+ListaCircular\DoubleLinkedCircleList.class
+module-info.class

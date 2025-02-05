@@ -1,3 +1,17 @@
+@font-face {
+    font-family: GothamBold;
+    src: url('./GothamBold.ttf');
+}
 .background-login{
     -fx-background-color: linear-gradient(to top, #1e1e1e, #303030);
+}
+
+.button-sign-up-bg{
+    -fx-background-color: #1fd660;
+    -fx-background-radius: 100;
+}
+.button-log-in-bg{
+    -fx-background-color: rgba(255, 255, 255, .0);
+    -fx-border-color: #666666;
+    -fx-border-radius: 100;
 }

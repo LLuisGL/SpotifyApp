@@ -9,7 +9,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="background-login">
          <children>
-            <ImageView fx:id="loadingImage" fitHeight="104.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="loadingImage" fitHeight="184.0" fitWidth="237.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@main/spotify_green_logo.png" />
                </image>
