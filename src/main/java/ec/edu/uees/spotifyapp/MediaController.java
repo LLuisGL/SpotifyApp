@@ -30,7 +30,9 @@ public class MediaController  {
         if(selectedFile != null){
             String userDir = System.getProperty("user.dir");
             userDir = userDir.replace("\\", "/");
-            String url = "file:/" + userDir + "/media/song1.mp4";
+            File archivo = new File(userDir);
+            String newURI = archivo.toURI().toString();
+            String url = newURI + "/media/song1.mp4";
             System.out.println(url);
             media = new Media(url);
             mediaPlayer = new MediaPlayer(media);
