@@ -4,6 +4,8 @@
  */
 package ListaCircular;
 
+import java.util.ListIterator;
+
 /** 
  * @author Carlos Auqui
  */
@@ -196,6 +198,97 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
             NodeUbi = NodeUbi.next; // Este metodo nos permite situarnos un nodo antes del que nos pide el usuario, y el next no lleva al solicitado.
         }
         return NodeUbi;
+    }
+    
+    public ListIterator<E> listIterator(){
+        ListIterator<E> listI = new ListIterator<E>(){
+            Node<E> traveler = first;
+            int initial_index = 0;
+            @Override
+            public boolean hasNext() {
+                return traveler != null;
+            }
+
+            @Override
+            public E next() {
+              E tmp = traveler.data;
+              traveler = traveler.next;
+              initial_index++;
+              return tmp;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return traveler != null;
+            }
+
+            @Override
+            public E previous() {
+                E tmp = traveler.data;
+                traveler = traveler.prev;
+                initial_index--;
+                return tmp;
+            }
+
+            @Override
+            public int nextIndex() {
+               return (initial_index+1);
+            }
+
+            @Override
+            public int previousIndex() {
+                return (initial_index-1);
+            }
+
+            @Override
+            public void remove() {
+                if(initial_index == 0){
+                    traveler = traveler.next;
+                    removeFirst();
+                  
+                }
+                if(initial_index == current-1){
+                    traveler = traveler.prev;
+                    removeLast();
+                    initial_index--;
+                    
+                }
+                traveler.next.prev = traveler.prev;
+                traveler.prev.next = traveler.next;
+                traveler.prev = null;
+                Node<E> tmp = traveler;
+                traveler = traveler.next;
+                tmp.next= null;
+                current--;
+            }
+
+            @Override
+            public void set(E e) {
+                traveler.data = e;
+            }
+
+            @Override
+            public void add(E e) {
+                if(initial_index == 0){
+                    traveler = traveler.next;
+                    addFirst(e);
+                    initial_index++; 
+                }
+                if(initial_index == current-1){
+                    addLast(e);
+                    traveler = traveler.next;
+                    initial_index++;
+                }
+                Node<E> NodeU = new Node<>(e);
+                traveler.prev.next = NodeU;
+                NodeU.next = traveler;
+                NodeU.prev = traveler.prev;
+                traveler.prev = NodeU;
+                traveler = NodeU;
+                current++;
+            }            
+        };
+        return listI;
     }
     
 }
