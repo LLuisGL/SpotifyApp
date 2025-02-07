@@ -21,6 +21,7 @@ public class MediaController  {
     private GestorVideo gestorvideo = new GestorVideo();
     private Media media;
     private MediaPlayer mediaPlayer;
+    private boolean isPaused = false;
     
     @FXML
     public void selectMedia(){
@@ -32,7 +33,27 @@ public class MediaController  {
             mediaPlayer.setAutoPlay(true);
                 
     }
-    
+    @FXML
+    public void start(){
+     if(mediaPlayer != null){
+        if(isPaused)
+        {
+           mediaPlayer.play();
+           isPaused = false;
+        }
+        else{
+            mediaPlayer.stop();
+        }
+      }       
+    }
+    @FXML
+    public void pause(){
+        if(mediaPlayer != null){
+            mediaPlayer.pause();
+            isPaused = true;
+        }
+    }
+        
     @FXML 
     public void NextVideo(){
         Video nextVide;

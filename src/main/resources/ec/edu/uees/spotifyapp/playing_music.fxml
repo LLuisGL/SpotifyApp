@@ -119,7 +119,7 @@
                               <Image url="@main/anterior_pista.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="70.0" onMouseClicked="#selectMedia" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="60.0" fitWidth="70.0" onMouseClicked="#start" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@main/play_3.png" />
                            </image>
