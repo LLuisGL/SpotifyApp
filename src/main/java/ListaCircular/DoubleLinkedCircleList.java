@@ -220,10 +220,10 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         return NodeUbi;
     }
     
-    public ListIterator<E> listIterator(int index){
+    public ListIterator<E> listIterator(){
         ListIterator<E> listI = new ListIterator<E>(){
-            Node<E> traveler = SetUbicacion(index);
-            int initial_index = index;
+            Node<E> traveler = first;
+            int initial_index = 0;
             
             @Override
             public boolean hasNext() {

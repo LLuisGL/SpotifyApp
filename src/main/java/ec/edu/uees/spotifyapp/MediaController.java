@@ -1,5 +1,7 @@
 package ec.edu.uees.spotifyapp;
 
+import Video.ExcepcionesVideo;
+import Video.Video;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -11,11 +13,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import Video.GestorVideo;
 
 public class MediaController  {
     @FXML
     private MediaView mediaView;
-    
+    private GestorVideo gestorvideo = new GestorVideo();
     private Media media;
     private MediaPlayer mediaPlayer;
     
@@ -31,6 +34,34 @@ public class MediaController  {
             mediaPlayer = new MediaPlayer(media);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
+        }
+    }
+    
+    @FXML 
+    public void NextVideo(){
+        Video nextVide;
+        try {
+            nextVide = gestorvideo.getNextVideo();
+            Media NextMedia = nextVide.getMedia();
+            mediaPlayer = new MediaPlayer(NextMedia);
+            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer.setAutoPlay(true);
+        } catch (ExcepcionesVideo ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    @FXML 
+    public void PrevVideo(){
+        Video prevVideo;
+        try{
+            prevVideo = gestorvideo.getPrevVideo();
+            Media prevMedia = prevVideo.getMedia();
+            mediaPlayer = new MediaPlayer(prevMedia);
+            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer.setAutoPlay(true);
+        } catch (ExcepcionesVideo ex) {
+            ex.printStackTrace();
         }
     }
     

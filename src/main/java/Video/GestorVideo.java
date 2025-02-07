@@ -10,6 +10,7 @@ import javafx.scene.media.Media;
  */
 public class GestorVideo {
     DoubleLinkedCircleList<Video> ListaVideo = new DoubleLinkedCircleList<>();
+    ListIterator<Video> VideoIterator = ListaVideo.listIterator();
     
     // metodo que permitira agregar un nuevo video al arreglo
     public void addVideo(String nombre, String artistaVideo, String colorVideo, Media archivoVideo){
@@ -28,34 +29,25 @@ public class GestorVideo {
         }
     }
     // metodo que avanzara al siguiente video
-    public Video getNextVideo(Video bv) throws ExcepcionesVideo{
-        if(!ListaVideo.contains(bv)){
-            throw new ExcepcionesVideo("El video no se encuentra almacenado"); 
+    public Video getNextVideo() throws ExcepcionesVideo{
+        if (VideoIterator.hasNext()){
+            Video NextVideo = VideoIterator.next();
+            return NextVideo;
         }
-        int IndexBase = ListaVideo.getIndex(bv);
-        ListIterator<Video> VideoIterator = ListaVideo.listIterator(IndexBase);
-        Video NextVideo = VideoIterator.next();
-      return NextVideo;   
+        else{
+            throw new ExcepcionesVideo("No hay un video siguiente");
+        }
     }
     
     // metodo que retrocede al anterior video
-    public Video getPrevVideo(Video bv) throws ExcepcionesVideo{
-        if(!ListaVideo.contains(bv)){
-            throw new ExcepcionesVideo("El video no se encuentra almacenado"); 
-        }
-        int IndexBase = ListaVideo.getIndex(bv);
-        ListIterator<Video> VideoIterator = ListaVideo.listIterator(IndexBase);
-        Video PrevVideo = VideoIterator.previous();
-     return PrevVideo;
-    }
-    // metodo de loop constante de los elemetos del arreglo
-    public Video loopVideo(Video bv){
-        int indexVideo= ListaVideo.getIndex(bv);
-        ListIterator<Video> VideoIterator = ListaVideo.listIterator(indexVideo);
+    public Video getPrevVideo() throws ExcepcionesVideo{
         if(VideoIterator.hasNext()){
-            Video videoActual = VideoIterator.next();           
-        return videoActual;
+            Video PrevVideo = VideoIterator.previous();
+            return PrevVideo;
         }
-      return null;
+        else{
+           throw new ExcepcionesVideo("No hay un video siguiente");  
+        }
     }
+
 }
