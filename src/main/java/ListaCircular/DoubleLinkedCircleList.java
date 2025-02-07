@@ -4,6 +4,8 @@
  */
 package ListaCircular;
 
+import java.util.ListIterator;
+
 /** 
  * @author Carlos Auqui
  */
@@ -11,6 +13,8 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
     private Node<E> first;
     private Node<E> last;
     private int current;
+
+    
    
     class Node<E>{
         E data;
@@ -190,12 +194,121 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         return false;
     }
     
+    // metodo creado que retornara el indice de un objeto pertenciente al arreglo
+    @Override
+    public int getIndex(E e) {
+        if(this.isEmpty()){
+            throw new IndexOutOfBoundsException("No existe el indice");
+        }
+        int indNode = 0;
+        Node<E> comp = first;
+        for(int i= 0; i<current; i++){
+            if(comp.data.equals(e)){
+                return indNode;
+            }
+            comp = comp.next;
+            indNode++;
+        }
+       throw new IndexOutOfBoundsException("No existe el indice"); 
+    }
+    
     private Node<E> SetUbicacion(int Index){
         Node<E> NodeUbi = first;
         for(int i= 0 ; i<Index;i++){
             NodeUbi = NodeUbi.next; // Este metodo nos permite situarnos un nodo antes del que nos pide el usuario, y el next no lleva al solicitado.
         }
         return NodeUbi;
+    }
+    
+    public ListIterator<E> listIterator(int index){
+        ListIterator<E> listI = new ListIterator<E>(){
+            Node<E> traveler = SetUbicacion(index);
+            int initial_index = index;
+            @Override
+            public boolean hasNext() {
+                return traveler != null;
+            }
+
+            @Override
+            public E next() {
+              traveler = traveler.next;
+              E tmp = traveler.data;
+              initial_index++;
+              return tmp;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return traveler != null;
+            }
+
+            @Override
+            public E previous() {
+                traveler = traveler.prev;
+                E tmp = traveler.data;
+                initial_index--;
+                return tmp;
+            }
+
+            @Override
+            public int nextIndex() {
+               return (initial_index+1);
+            }
+
+            @Override
+            public int previousIndex() {
+                return (initial_index-1);
+            }
+
+            @Override
+            public void remove() {
+                if(initial_index == 0){
+                    traveler = traveler.next;
+                    removeFirst();
+                  
+                }
+                if(initial_index == current-1){
+                    traveler = traveler.prev;
+                    removeLast();
+                    initial_index--;
+                    
+                }
+                traveler.next.prev = traveler.prev;
+                traveler.prev.next = traveler.next;
+                traveler.prev = null;
+                Node<E> tmp = traveler;
+                traveler = traveler.next;
+                tmp.next= null;
+                current--;
+            }
+
+            @Override
+            public void set(E e) {
+                traveler.data = e;
+            }
+
+            @Override
+            public void add(E e) {
+                if(initial_index == 0){
+                    traveler = traveler.next;
+                    addFirst(e);
+                    initial_index++; 
+                }
+                if(initial_index == current-1){
+                    addLast(e);
+                    traveler = traveler.next;
+                    initial_index++;
+                }
+                Node<E> NodeU = new Node<>(e);
+                traveler.prev.next = NodeU;
+                NodeU.next = traveler;
+                NodeU.prev = traveler.prev;
+                traveler.prev = NodeU;
+                traveler = NodeU;
+                current++;
+            }            
+        };
+        return listI;
     }
     
 }
