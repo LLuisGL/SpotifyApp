@@ -13,6 +13,8 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
     private Node<E> first;
     private Node<E> last;
     private int current;
+
+    
    
     class Node<E>{
         E data;
@@ -184,12 +186,30 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         } 
         Node<E> comp = first;
         for (int i = 0; i<current;i++){ //metodo que te va comparando cada data del nodo con equals
-           if(comp.data.equals(e)){
+           if(comp.equals(e)){
                return true;
            }
            comp = comp.next;
         }
         return false;
+    }
+    
+    // metodo creado que retornara el indice de un objeto pertenciente al arreglo
+    @Override
+    public int getIndex(E e) {
+        if(this.isEmpty()){
+            throw new IndexOutOfBoundsException("No existe el indice");
+        }
+        int indNode = 0;
+        Node<E> comp = first;
+        for(int i= 0; i<current; i++){
+            if(comp.equals(e)){
+                return indNode;
+            }
+            comp = comp.next;
+            indNode++;
+        }
+       throw new IndexOutOfBoundsException("No existe el indice"); 
     }
     
     private Node<E> SetUbicacion(int Index){

@@ -14,4 +14,5 @@ public interface Lista<E>  {
     E remove(int e);
     boolean add(int index, E e);
     boolean contains(E e);
+    int getIndex(E e);
 }
