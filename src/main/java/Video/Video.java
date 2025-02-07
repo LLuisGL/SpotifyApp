@@ -1,6 +1,7 @@
 package Video;
 
 import java.time.Duration;
+import javafx.scene.media.Media;
 
 /**
  *
@@ -9,24 +10,22 @@ import java.time.Duration;
 public class Video {
     private String nombreVideo;
     private String artistaVideo;
-    private String colorVideo;
-    
-    private String ruta;
-    private Duration duracion;
+    private String colorVideo;   
+    private Media archivoVideo;
 
-    public Video(String nombreVideo, String artistaVideo, String colorVideo, String ruta, Duration duracion) {
+    public Video(String nombreVideo, String artistaVideo, String colorVideo, Media archivoVideo) {
         this.nombreVideo = nombreVideo;
         this.artistaVideo = artistaVideo;
-        this.ruta = ruta;
-        this.duracion = duracion;
+        this.colorVideo = colorVideo;
+        this.archivoVideo = archivoVideo;
     }
 
-    public String getRuta() {
-        return ruta;
+    public Media getMedia() {
+        return archivoVideo;
     }
 
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
+    public void setMedia(Media archivoVideo) {
+        this.archivoVideo = archivoVideo;
     }
 
     public String getNombre_video() {
@@ -35,14 +34,6 @@ public class Video {
 
     public void setNombre_video(String nombre_video) {
         this.nombreVideo = nombreVideo.toUpperCase();
-    }
-
-    public Duration getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(Duration duracion) {
-        this.duracion = duracion;
     }
 
     public String getNombreVideo() {
