@@ -20,7 +20,7 @@
                   <MediaView fx:id="mediaView" fitHeight="1.0" fitWidth="1.0" scaleX="1000.0" scaleY="710.0" translateY="350.0" />
                   <HBox alignment="CENTER" prefHeight="62.0" prefWidth="420.0">
                      <children>
-                        <ImageView fitHeight="54.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="54.0" fitWidth="20.0" onMouseClicked="#switchToMain" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@main/flecha_abajo.png" />
                            </image>
