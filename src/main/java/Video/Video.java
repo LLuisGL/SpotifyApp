@@ -11,21 +11,21 @@ public class Video {
     private String nombreVideo;
     private String artistaVideo;
     private String colorVideo;   
-    private Media archivoVideo;
+    private String URlVideo;
 
-    public Video(String nombreVideo, String artistaVideo, String colorVideo, Media archivoVideo) {
+    public Video(String nombreVideo, String artistaVideo, String colorVideo, String URlVideo) {
         this.nombreVideo = nombreVideo;
         this.artistaVideo = artistaVideo;
         this.colorVideo = colorVideo;
-        this.archivoVideo = archivoVideo;
+        this.URlVideo = URlVideo;
     }
 
-    public Media getMedia() {
-        return archivoVideo;
+    public String getURlVideo() {
+        return URlVideo;
     }
 
-    public void setMedia(Media archivoVideo) {
-        this.archivoVideo = archivoVideo;
+    public void setURlVideo(String URLVideo) {
+        this.URlVideo = URlVideo;
     }
 
     public String getNombre_video() {

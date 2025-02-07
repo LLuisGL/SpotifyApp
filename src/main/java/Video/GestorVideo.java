@@ -9,14 +9,31 @@ import javafx.scene.media.Media;
  * @author Carlos Auqui
  */
 public class GestorVideo {
-    DoubleLinkedCircleList<Video> ListaVideo = new DoubleLinkedCircleList<>();
-    ListIterator<Video> VideoIterator = ListaVideo.listIterator();
     
-    // metodo que permitira agregar un nuevo video al arreglo
-    public void addVideo(String nombre, String artistaVideo, String colorVideo, Media archivoVideo){
-        Video v = new Video(nombre, artistaVideo, colorVideo, archivoVideo);
-        ListaVideo.addLast(v);
+    Video v1 = new Video("Bring me to life","Evanenscence","verde","/media/song1.mp4");
+    Video v2 = new Video("Dragon Ball Rap","Porta", "Rojo","/media/song2.mp4");
+    Video v3 = new Video("Rebota","Guayana", "Azul", "media/song3.mp4");
+    Video v4 = new Video("In the End","Linking par", "Azul", "media/song4.mp4");
+    Video v5 = new Video("Titi me pregunto ","Bad bo", "Azul", "media/song3.mp4");
+    
+    DoubleLinkedCircleList<Video> ListaVideo = new DoubleLinkedCircleList<>();
+    ListIterator<Video> VideoIterator;
+    
+    public GestorVideo(){
+        ListaVideo.addLast(v1);
+        ListaVideo.addLast(v2);
+        ListaVideo.addLast(v3);
+        ListaVideo.addLast(v4);
+        ListaVideo.addLast(v5);
+        
+        VideoIterator = ListaVideo.listIterator();
     }
+    
+// metodo que permitira agregar un nuevo video al arreglo
+    public void addVideo(Video VI){
+        ListaVideo.addLast(VI);
+    }
+   
     // metodo que permite eliminar un video del arreglo
     public void removeVideo(Video vR) throws ExcepcionesVideo{
         Boolean verificacion = ListaVideo.contains(vR);

@@ -24,21 +24,13 @@ public class MediaController  {
     
     @FXML
     public void selectMedia(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Media");
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile != null){
-            String userDir = System.getProperty("user.dir");
-            userDir = userDir.replace("\\", "/");
-            File archivo = new File(userDir);
-            String newURI = archivo.toURI().toString();
-            String url = newURI + "/media/song1.mp4";
+            String url = Directorio()+"/media/song1.mp4";
             System.out.println(url);
             media = new Media(url);
             mediaPlayer = new MediaPlayer(media);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
-        }
+                
     }
     
     @FXML 
@@ -46,7 +38,9 @@ public class MediaController  {
         Video nextVide;
         try {
             nextVide = gestorvideo.getNextVideo();
-            Media NextMedia = nextVide.getMedia();
+            String UrlString = nextVide.getURlVideo();
+            String UrlMedia = Directorio()+UrlString;
+            Media NextMedia = new Media(UrlMedia);
             mediaPlayer = new MediaPlayer(NextMedia);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
@@ -60,7 +54,9 @@ public class MediaController  {
         Video prevVideo;
         try{
             prevVideo = gestorvideo.getPrevVideo();
-            Media prevMedia = prevVideo.getMedia();
+            String UrlString = prevVideo.getURlVideo();
+            String UrlMedia = Directorio()+UrlString;
+            Media prevMedia = new Media(UrlMedia);
             mediaPlayer = new MediaPlayer(prevMedia);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
@@ -76,5 +72,13 @@ public class MediaController  {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    private String Directorio(){
+        String userDir = System.getProperty("user.dir");
+        userDir = userDir.replace("\\", "/");
+        File archivo = new File(userDir);
+        String newURI = archivo.toURI().toString();
+     return newURI;   
     }
 }

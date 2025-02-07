@@ -1,10 +1,14 @@
+Video\ExcepcionesVideo.class
 ec\edu\uees\spotifyapp\Main.class
 ec\edu\uees\spotifyapp\LoadingThread.class
 ec\edu\uees\spotifyapp\App.class
 module-info.class
+Video\Video.class
 ListaCircular\Lista.class
 ListaCircular\DoubleLinkedCircleList$Node.class
 ec\edu\uees\spotifyapp\LoadingController.class
 ec\edu\uees\spotifyapp\Login.class
+Video\GestorVideo.class
 ListaCircular\DoubleLinkedCircleList.class
 ec\edu\uees\spotifyapp\MediaController.class
+ListaCircular\DoubleLinkedCircleList$1.class
