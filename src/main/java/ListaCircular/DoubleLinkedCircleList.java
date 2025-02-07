@@ -224,6 +224,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         ListIterator<E> listI = new ListIterator<E>(){
             Node<E> traveler = SetUbicacion(index);
             int initial_index = index;
+            
             @Override
             public boolean hasNext() {
                 return traveler != null;
