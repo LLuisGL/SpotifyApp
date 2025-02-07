@@ -28,7 +28,9 @@ public class MediaController  {
         fileChooser.setTitle("Select Media");
         File selectedFile = fileChooser.showOpenDialog(null);
         if(selectedFile != null){
-            String url = selectedFile.toURI().toString();
+            String userDir = System.getProperty("user.dir");
+            userDir = userDir.replace("\\", "/");
+            String url = "file:/" + userDir + "/media/song1.mp4";
             System.out.println(url);
             media = new Media(url);
             mediaPlayer = new MediaPlayer(media);
