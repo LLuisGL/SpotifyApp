@@ -12,28 +12,30 @@ public class Video {
     private String artistaVideo;
     private String colorVideo;   
     private String URlVideo;
+    private String iconoVideo;
 
-    public Video(String nombreVideo, String artistaVideo, String colorVideo, String URlVideo) {
+    public Video(String nombreVideo, String artistaVideo, String colorVideo, String URlVideo, String iconoVideo) {
         this.nombreVideo = nombreVideo;
         this.artistaVideo = artistaVideo;
         this.colorVideo = colorVideo;
         this.URlVideo = URlVideo;
+        this.iconoVideo = iconoVideo;
     }
 
     public String getURlVideo() {
         return URlVideo;
     }
 
+    public String getIconoVideo() {
+        return iconoVideo;
+    }
+
+    public void setIconoVideo(String iconoVideo) {
+        this.iconoVideo = iconoVideo;
+    }
+    
     public void setURlVideo(String URLVideo) {
         this.URlVideo = URlVideo;
-    }
-
-    public String getNombre_video() {
-        return nombreVideo;
-    }
-
-    public void setNombre_video(String nombre_video) {
-        this.nombreVideo = nombreVideo.toUpperCase();
     }
 
     public String getNombreVideo() {

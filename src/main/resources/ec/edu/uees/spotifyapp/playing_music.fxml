@@ -11,7 +11,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="420.0" styleClass="background-login" stylesheets="@spotify.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.uees.spotifyapp.MediaController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="420.0" styleClass="background-login" stylesheets="@spotify.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.uees.spotifyapp.MediaController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -61,7 +61,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="420.0">
                      <children>
-                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="iconoCancionImage" fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@main/bring_me_to_life.jpg" />
                            </image>
@@ -71,7 +71,7 @@
                         </ImageView>
                         <VBox prefHeight="70.0" prefWidth="226.0">
                            <children>
-                              <Label prefHeight="32.0" prefWidth="278.0" text="Example Label" textFill="WHITE">
+                              <Label fx:id="nombreCancionLabel" prefHeight="32.0" prefWidth="278.0" text="Example Label" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>
@@ -79,7 +79,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label prefHeight="26.0" prefWidth="236.0" text="Artist" textFill="#919191">
+                              <Label fx:id="nombreArtistaLabel" prefHeight="26.0" prefWidth="236.0" text="Artist" textFill="#919191">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -119,7 +119,7 @@
                               <Image url="@main/anterior_pista.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="70.0" onMouseClicked="#selectMedia" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="60.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@main/play_3.png" />
                            </image>

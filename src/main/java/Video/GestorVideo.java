@@ -10,11 +10,11 @@ import javafx.scene.media.Media;
  */
 public class GestorVideo {
     
-    Video v1 = new Video("Bring me to life","Evanenscence","verde","/media/song1.mp4");
-    Video v2 = new Video("Dragon Ball Rap","Porta", "Rojo","/media/song2.mp4");
-    Video v3 = new Video("Rebota","Guayana", "Azul", "media/song3.mp4");
-    Video v4 = new Video("In the End","Linking par", "Azul", "media/song4.mp4");
-    Video v5 = new Video("Titi me pregunto ","Bad bo", "Azul", "media/song3.mp4");
+    Video v1 = new Video("Bring me to life","Evanenscence","verde","/media/song1.mp4", "/media/song1.jpg");
+    Video v2 = new Video("Dragon Ball Rap","Porta", "Rojo","/media/song2.mp4", "/media/song2.jpeg");
+    Video v3 = new Video("Rebota","Guayana", "Azul", "media/song3.mp4", "/media/song3.jpg");
+    Video v4 = new Video("In the End","Linking par", "Azul", "media/song4.mp4", "/media/song4.jpeg");
+    Video v5 = new Video("Titi me pregunto ","Bad bo", "Azul", "media/song5.mp4", "/media/song5.jpeg");
     
     DoubleLinkedCircleList<Video> ListaVideo = new DoubleLinkedCircleList<>();
     ListIterator<Video> VideoIterator;

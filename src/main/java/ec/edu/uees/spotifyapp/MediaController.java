@@ -14,24 +14,23 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import Video.GestorVideo;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class MediaController  {
+public class MediaController implements Initializable {
     @FXML
     private MediaView mediaView;
+    @FXML
+    private Label nombreArtistaLabel;
+    @FXML
+    private ImageView iconoCancionImage;
+    @FXML
+    private Label nombreCancionLabel;
+    
     private GestorVideo gestorvideo = new GestorVideo();
     private Media media;
     private MediaPlayer mediaPlayer;
-    
-    @FXML
-    public void selectMedia(){
-            String url = Directorio()+"/media/song1.mp4";
-            System.out.println(url);
-            media = new Media(url);
-            mediaPlayer = new MediaPlayer(media);
-            mediaView.setMediaPlayer(mediaPlayer);
-            mediaPlayer.setAutoPlay(true);
-                
-    }
     
     @FXML 
     public void NextVideo(){
@@ -44,6 +43,13 @@ public class MediaController  {
             mediaPlayer = new MediaPlayer(NextMedia);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
+            String urlIcono = nextVide.getIconoVideo();
+            String urlIconoMedia = Directorio()+urlIcono;
+            System.out.println(urlIconoMedia);
+            Image image = new Image(urlIconoMedia);
+            iconoCancionImage.setImage(image);
+            nombreArtistaLabel.setText(nextVide.getArtistaVideo());
+            nombreCancionLabel.setText(nextVide.getNombreVideo());
         } catch (ExcepcionesVideo ex) {
             ex.printStackTrace();
         }
@@ -60,6 +66,12 @@ public class MediaController  {
             mediaPlayer = new MediaPlayer(prevMedia);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
+            String urlIcono = prevVideo.getIconoVideo();
+            String urlIconoMedia = Directorio()+urlIcono;
+            Image image = new Image(urlIconoMedia);
+            iconoCancionImage.setImage(image);
+            nombreArtistaLabel.setText(prevVideo.getArtistaVideo());
+            nombreCancionLabel.setText(prevVideo.getNombreVideo());
         } catch (ExcepcionesVideo ex) {
             ex.printStackTrace();
         }
@@ -80,5 +92,11 @@ public class MediaController  {
         File archivo = new File(userDir);
         String newURI = archivo.toURI().toString();
      return newURI;   
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        NextVideo();
+        PrevVideo();
     }
 }
