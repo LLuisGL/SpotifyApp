@@ -186,7 +186,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         } 
         Node<E> comp = first;
         for (int i = 0; i<current;i++){ //metodo que te va comparando cada data del nodo con equals
-           if(comp.equals(e)){
+           if(comp.data.equals(e)){
                return true;
            }
            comp = comp.next;
@@ -203,7 +203,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         int indNode = 0;
         Node<E> comp = first;
         for(int i= 0; i<current; i++){
-            if(comp.equals(e)){
+            if(comp.data.equals(e)){
                 return indNode;
             }
             comp = comp.next;
@@ -220,10 +220,10 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         return NodeUbi;
     }
     
-    public ListIterator<E> listIterator(){
+    public ListIterator<E> listIterator(int index){
         ListIterator<E> listI = new ListIterator<E>(){
-            Node<E> traveler = first;
-            int initial_index = 0;
+            Node<E> traveler = SetUbicacion(index);
+            int initial_index = index;
             @Override
             public boolean hasNext() {
                 return traveler != null;
@@ -231,8 +231,8 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
 
             @Override
             public E next() {
-              E tmp = traveler.data;
               traveler = traveler.next;
+              E tmp = traveler.data;
               initial_index++;
               return tmp;
             }
@@ -244,8 +244,8 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
 
             @Override
             public E previous() {
-                E tmp = traveler.data;
                 traveler = traveler.prev;
+                E tmp = traveler.data;
                 initial_index--;
                 return tmp;
             }
