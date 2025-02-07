@@ -2,6 +2,7 @@ package Video;
 
 import ListaCircular.DoubleLinkedCircleList;
 import java.util.ListIterator;
+import javafx.scene.media.Media;
 
 /**
  *
@@ -11,8 +12,8 @@ public class GestorVideo {
     DoubleLinkedCircleList<Video> ListaVideo = new DoubleLinkedCircleList<>();
     
     // metodo que permitira agregar un nuevo video al arreglo
-    public void addVideo(String nombre, String ruta){
-        Video v = new Video(nombre, ruta);
+    public void addVideo(String nombre, String artistaVideo, String colorVideo, Media archivoVideo){
+        Video v = new Video(nombre, artistaVideo, colorVideo, archivoVideo);
         ListaVideo.addLast(v);
     }
     // metodo que permite eliminar un video del arreglo

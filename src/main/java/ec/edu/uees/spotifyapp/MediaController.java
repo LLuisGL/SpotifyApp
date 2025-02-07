@@ -1,6 +1,7 @@
 package ec.edu.uees.spotifyapp;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -30,6 +31,15 @@ public class MediaController  {
             mediaPlayer = new MediaPlayer(media);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.setAutoPlay(true);
+        }
+    }
+    
+    @FXML
+    public void switchToMain(){
+        try {
+            App.setRoot("main");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }
