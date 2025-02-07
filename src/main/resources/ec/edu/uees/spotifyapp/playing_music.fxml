@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="420.0" styleClass="background-login" stylesheets="@spotify.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.uees.spotifyapp.MediaController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="504.0" prefWidth="420.0">
+               <children>
+                  <MediaView fx:id="mediaView" fitHeight="1.0" fitWidth="1.0" scaleX="1000.0" scaleY="710.0" translateY="350.0" />
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="420.0">
+                     <children>
+                        <ImageView fitHeight="54.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/flecha_abajo.png" />
+                           </image>
+                        </ImageView>
+                        <VBox alignment="CENTER" prefHeight="64.0" prefWidth="226.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="0.0" prefWidth="226.0" text="PLAYING FROM THIS PLAYLIST" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="226.0" text="Album Nuevo" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="50.0" right="50.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <ImageView fitHeight="54.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/ver-mas.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="223.0" prefWidth="420.0" styleClass="music-nav-bar">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="420.0">
+                     <children>
+                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/bring_me_to_life.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox prefHeight="70.0" prefWidth="226.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="278.0" text="Example Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <Label prefHeight="26.0" prefWidth="236.0" text="Artist" textFill="#919191">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <ImageView fitHeight="54.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/menos.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="54.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/agregar.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="17.0" prefWidth="420.0">
+                     <children>
+                        <Slider prefHeight="14.0" prefWidth="384.0" />
+                     </children></HBox>
+                  <HBox prefHeight="17.0" prefWidth="420.0" />
+                  <HBox alignment="CENTER" prefHeight="61.0" prefWidth="420.0">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/anterior_pista.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="60.0" fitWidth="70.0" onMouseClicked="#selectMedia" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/play_3.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@main/siguiente_pista.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

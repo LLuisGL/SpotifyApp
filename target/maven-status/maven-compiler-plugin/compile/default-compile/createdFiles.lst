@@ -7,3 +7,4 @@ ListaCircular\DoubleLinkedCircleList$Node.class
 ec\edu\uees\spotifyapp\LoadingController.class
 ec\edu\uees\spotifyapp\Login.class
 ListaCircular\DoubleLinkedCircleList.class
+ec\edu\uees\spotifyapp\MediaController.class

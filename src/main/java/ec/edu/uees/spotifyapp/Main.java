@@ -16,7 +16,7 @@ public class Main {
     @FXML
     public void SwitchToMusic(){
         try {
-            App.setRoot("login");
+            App.setRoot("playing_music");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
