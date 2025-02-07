@@ -48,8 +48,9 @@ public class GestorVideo {
      return PrevVideo;
     }
     // metodo de loop constante de los elemetos del arreglo
-    public Video loopVideos(){
-        ListIterator<Video> VideoIterator = ListaVideo.listIterator(0);
+    public Video loopVideo(Video bv){
+        int indexVideo= ListaVideo.getIndex(bv);
+        ListIterator<Video> VideoIterator = ListaVideo.listIterator(indexVideo);
         if(VideoIterator.hasNext()){
             Video videoActual = VideoIterator.next();           
         return videoActual;
