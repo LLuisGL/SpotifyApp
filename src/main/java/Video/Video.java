@@ -27,7 +27,7 @@ public class Video {
     }
 
     public void setNombre_video(String nombre_video) {
-        this.nombre_video = nombre_video;
+        this.nombre_video = nombre_video.toUpperCase();
     }
 
     public double getDuracion() {

@@ -47,4 +47,13 @@ public class GestorVideo {
         Video PrevVideo = VideoIterator.previous();
      return PrevVideo;
     }
+    // metodo de loop constante de los elemetos del arreglo
+    public Video loopVideos(){
+        ListIterator<Video> VideoIterator = ListaVideo.listIterator(0);
+        if(VideoIterator.hasNext()){
+            Video videoActual = VideoIterator.next();           
+        return videoActual;
+        }
+      return null;
+    }
 }
