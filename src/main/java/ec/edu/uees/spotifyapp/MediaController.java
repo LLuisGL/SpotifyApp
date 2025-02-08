@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.stage.FileChooser;
 import Video.GestorVideo;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -52,51 +51,94 @@ public class MediaController implements Initializable {
             isPaused = true;
         }       
     }
+    
+    @FXML
+    public void IniciarVideo(){
+        Video v1 = gestorvideo.getFirstVideo();
+        String url = v1.getURlVideo();
+        String UrlString = Directorio()+url;
+        System.out.println(UrlString);
+        try{
+            Media NextMedia = new Media(UrlString);
+                mediaPlayer = new MediaPlayer(NextMedia);
+                mediaView.setMediaPlayer(mediaPlayer);
+                mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
+                    if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
+                        slider.setValue(0);
+                        NextVideo();
+                    }else{
+                        slider.setValue(newValue.toSeconds());
+                        actualDurationLabel.setText(String.valueOf((int)slider.getValue()));
+                    }
+                }));
+                mediaPlayer.setOnReady(() -> {
+                    Duration totalDuration = NextMedia.getDuration();
+                    System.out.println(totalDuration);
+                    maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
+                    slider.setMax(totalDuration.toSeconds());
+                    System.out.println(slider.getValue());
+                });
+                String urlIcono = v1.getIconoVideo();
+                String urlIconoMedia = Directorio()+urlIcono;
+                System.out.println(urlIconoMedia);
+                Image image = new Image(urlIconoMedia);
+                iconoCancionImage.setImage(image);
+                nombreArtistaLabel.setText(v1.getArtistaVideo());
+                nombreCancionLabel.setText(v1.getNombreVideo());
+                Thread.sleep(500);
+                mediaPlayer.setAutoPlay(true);
+      
+        } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }    
+    }
     @FXML 
     public void NextVideo(){
-        slider.setValue(0);
-        Video nextVide;
-        try {
-            nextVide = gestorvideo.getNextVideo();
-            String UrlString = nextVide.getURlVideo();
-            String UrlMedia = Directorio()+UrlString;
-            Media NextMedia = new Media(UrlMedia);
-            mediaPlayer = new MediaPlayer(NextMedia);
-            mediaView.setMediaPlayer(mediaPlayer);
-            mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
-                if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
-                    slider.setValue(0);
-                    NextVideo();
-                }else{
-                    slider.setValue(newValue.toSeconds());
-                    actualDurationLabel.setText(String.valueOf((int)slider.getValue()));
-                }
-            }));
-            mediaPlayer.setOnReady(() -> {
-                Duration totalDuration = NextMedia.getDuration();
-                System.out.println(totalDuration);
-                maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
-                slider.setMax(totalDuration.toSeconds());
-                System.out.println(slider.getValue());
-            });
-            String urlIcono = nextVide.getIconoVideo();
-            String urlIconoMedia = Directorio()+urlIcono;
-            System.out.println(urlIconoMedia);
-            Image image = new Image(urlIconoMedia);
-            iconoCancionImage.setImage(image);
-            nombreArtistaLabel.setText(nextVide.getArtistaVideo());
-            nombreCancionLabel.setText(nextVide.getNombreVideo());
-            Thread.sleep(500);
-            mediaPlayer.setAutoPlay(true);
-        } catch (ExcepcionesVideo ex) {
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        
+            mediaPlayer.stop();
+            slider.setValue(0);
+            Video nextVide;
+            try {
+                nextVide = gestorvideo.getNextVideo();
+                String UrlString = nextVide.getURlVideo();
+                String UrlMedia = Directorio()+UrlString;
+                Media NextMedia = new Media(UrlMedia);
+                mediaPlayer = new MediaPlayer(NextMedia);
+                mediaView.setMediaPlayer(mediaPlayer);
+                mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
+                    if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
+                        slider.setValue(0);
+                        NextVideo();
+                    }else{
+                        slider.setValue(newValue.toSeconds());
+                        actualDurationLabel.setText(String.valueOf((int)slider.getValue()));
+                    }
+                }));
+                mediaPlayer.setOnReady(() -> {
+                    Duration totalDuration = NextMedia.getDuration();
+                    System.out.println(totalDuration);
+                    maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
+                    slider.setMax(totalDuration.toSeconds());
+                    System.out.println(slider.getValue());
+                });
+                String urlIcono = nextVide.getIconoVideo();
+                String urlIconoMedia = Directorio()+urlIcono;
+                System.out.println(urlIconoMedia);
+                Image image = new Image(urlIconoMedia);
+                iconoCancionImage.setImage(image);
+                nombreArtistaLabel.setText(nextVide.getArtistaVideo());
+                nombreCancionLabel.setText(nextVide.getNombreVideo());
+                Thread.sleep(500);
+                mediaPlayer.setAutoPlay(true);
+            } catch (ExcepcionesVideo ex) {
+                ex.printStackTrace();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            } 
     }
     @FXML 
     public void PrevVideo(){
+        mediaPlayer.stop();
+        slider.setValue(0);
         Video prevVideo;
         try{
             prevVideo = gestorvideo.getPrevVideo();
@@ -106,7 +148,8 @@ public class MediaController implements Initializable {
             mediaPlayer = new MediaPlayer(prevMedia);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
-                if(slider.getValue() >= prevMedia.getDuration().toSeconds()){
+                if(slider.getValue() >= prevMedia.getDuration().toSeconds()- 0.5){
+                    slider.setValue(0);
                     NextVideo();
                 }
                 slider.setValue(newValue.toSeconds());
@@ -115,8 +158,8 @@ public class MediaController implements Initializable {
             mediaPlayer.setOnReady(() -> {
                 Duration totalDuration = prevMedia.getDuration();
                 System.out.println(totalDuration);
-                maxDurationLabel.setText("" + totalDuration.toSeconds());
-                slider.setMax(totalDuration.toSeconds());
+                maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
+                slider.setMax((int)totalDuration.toSeconds());
                 System.out.println(slider.getValue());
             });
             String urlIcono = prevVideo.getIconoVideo();
@@ -137,6 +180,8 @@ public class MediaController implements Initializable {
     @FXML
     public void switchToMain(){
         try {
+            mediaPlayer.stop();
+            mediaPlayer = null;
             App.setRoot("main");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -158,6 +203,6 @@ public class MediaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        NextVideo();
+        IniciarVideo();
     }
 }

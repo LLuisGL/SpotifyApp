@@ -66,5 +66,10 @@ public class GestorVideo {
            throw new ExcepcionesVideo("No hay un video siguiente");  
         }
     }
+    
+    public Video getFirstVideo(){
+        Video firstVideo = ListaVideo.get(0);
+        return firstVideo; 
+    }
 
 }
