@@ -102,6 +102,12 @@ public class MediaController implements Initializable {
         }       
     }
     
+    
+    @FXML
+    public void setUpSlider(){
+        
+    }
+    
     @FXML
     public void IniciarVideo(){
         Video v1 = gestorvideo.getFirstVideo();
