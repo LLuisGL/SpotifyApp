@@ -116,7 +116,7 @@ public class MediaController implements Initializable {
                     double totalDuration = NextMedia.getDuration().toSeconds();
                     double actualDuration = newValue.toSeconds();
                     double actualPercent = (100*actualDuration)/totalDuration;
-                    String cssProperty = "-fx-background-color: linear-gradient(to right, #2D819D " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+                    String cssProperty = "-fx-background-color: linear-gradient(to right, #" + v1.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
                     slider.lookup(".track").setStyle(cssProperty);
                     if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
                         slider.setValue(0);
@@ -163,7 +163,7 @@ public class MediaController implements Initializable {
                     double totalDuration = NextMedia.getDuration().toSeconds();
                     double actualDuration = newValue.toSeconds();
                     double actualPercent = (100*actualDuration)/totalDuration;
-                    String cssProperty = "-fx-background-color: linear-gradient(to right, #2D819D " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+                    String cssProperty = "-fx-background-color: linear-gradient(to right, #" + nextVide.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
                     slider.lookup(".track").setStyle(cssProperty);
                     if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
                         slider.setValue(0);
@@ -211,7 +211,8 @@ public class MediaController implements Initializable {
                 double totalDuration = prevMedia.getDuration().toSeconds();
                 double actualDuration = newValue.toSeconds();
                 double actualPercent = (100*actualDuration)/totalDuration;
-                String cssProperty = "-fx-background-color: linear-gradient(to right, #2D819D " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+                String cssProperty = "-fx-background-color: linear-gradient(to right, #" + prevVideo.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+                System.out.println(cssProperty);
                 slider.lookup(".track").setStyle(cssProperty);
                 if(slider.getValue() >= prevMedia.getDuration().toSeconds()- 0.5){
                     slider.setValue(0);
