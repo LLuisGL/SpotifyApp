@@ -111,6 +111,7 @@ public class MediaController implements Initializable {
         try{
             Media NextMedia = new Media(UrlString);
                 mediaPlayer = new MediaPlayer(NextMedia);
+                mediaPlayer.setVolume(volumen);
                 mediaView.setMediaPlayer(mediaPlayer);
                 mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
                     double totalDuration = NextMedia.getDuration().toSeconds();
@@ -158,6 +159,7 @@ public class MediaController implements Initializable {
                 String UrlMedia = Directorio()+UrlString;
                 Media NextMedia = new Media(UrlMedia);
                 mediaPlayer = new MediaPlayer(NextMedia);
+                mediaPlayer.setVolume(volumen);
                 mediaView.setMediaPlayer(mediaPlayer);
                 mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
                     double totalDuration = NextMedia.getDuration().toSeconds();
@@ -206,6 +208,7 @@ public class MediaController implements Initializable {
             String UrlMedia = Directorio()+UrlString;
             Media prevMedia = new Media(UrlMedia);
             mediaPlayer = new MediaPlayer(prevMedia);
+            mediaPlayer.setVolume(volumen);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
                 double totalDuration = prevMedia.getDuration().toSeconds();
