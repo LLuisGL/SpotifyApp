@@ -109,7 +109,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="17.0" prefWidth="420.0">
                      <children>
-                        <Slider fx:id="slider" prefHeight="14.0" prefWidth="384.0" />
+                        <Slider fx:id="slider" onMousePressed="#setUpSlider" prefHeight="14.0" prefWidth="384.0" />
                      </children></HBox>
                   <HBox prefHeight="17.0" prefWidth="420.0">
                      <children>

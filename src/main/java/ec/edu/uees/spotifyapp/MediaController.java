@@ -41,6 +41,7 @@ public class MediaController implements Initializable {
     
     
     private GestorVideo gestorvideo = new GestorVideo();
+    private Video video;
     private Media media;
     private MediaPlayer mediaPlayer;
     private boolean isPaused = true;
@@ -105,50 +106,58 @@ public class MediaController implements Initializable {
     
     @FXML
     public void setUpSlider(){
-        
+        mediaPlayer.stop();
+        mediaPlayer.seek(Duration.seconds(slider.getValue()));
+        double totalDuration = media.getDuration().toSeconds();
+        double actualDuration = slider.getValue();
+        double actualPercent = (100*actualDuration)/totalDuration;
+        String cssProperty = "-fx-background-color: linear-gradient(to right, #" + video.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+        slider.lookup(".track").setStyle(cssProperty);
+        mediaPlayer.pause();   
+        isPaused = true;
     }
     
     @FXML
     public void IniciarVideo(){
-        Video v1 = gestorvideo.getFirstVideo();
-        String url = v1.getURlVideo();
+        video = gestorvideo.getFirstVideo();
+        String url = video.getURlVideo();
         String UrlString = Directorio()+url;
         System.out.println(UrlString);
         try{
-            Media NextMedia = new Media(UrlString);
-                mediaPlayer = new MediaPlayer(NextMedia);
-                mediaPlayer.setVolume(volumen);
-                mediaView.setMediaPlayer(mediaPlayer);
-                mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
-                    double totalDuration = NextMedia.getDuration().toSeconds();
-                    double actualDuration = newValue.toSeconds();
-                    double actualPercent = (100*actualDuration)/totalDuration;
-                    String cssProperty = "-fx-background-color: linear-gradient(to right, #" + v1.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
-                    slider.lookup(".track").setStyle(cssProperty);
-                    if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
-                        slider.setValue(0);
-                        NextVideo();
-                    }else{
-                        slider.setValue(newValue.toSeconds());
-                        actualDurationLabel.setText(String.valueOf((int)slider.getValue()));
-                    }
-                }));
-                mediaPlayer.setOnReady(() -> {
-                    Duration totalDuration = NextMedia.getDuration();
-                    System.out.println(totalDuration);
-                    maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
-                    slider.setMax(totalDuration.toSeconds());
-                    System.out.println(slider.getValue());
-                });
-                String urlIcono = v1.getIconoVideo();
-                String urlIconoMedia = Directorio()+urlIcono;
-                System.out.println(urlIconoMedia);
-                Image image = new Image(urlIconoMedia);
-                iconoCancionImage.setImage(image);
-                nombreArtistaLabel.setText(v1.getArtistaVideo());
-                nombreCancionLabel.setText(v1.getNombreVideo());
-                Thread.sleep(500);
-                mediaPlayer.setAutoPlay(true);
+            media = new Media(UrlString);
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(volumen);
+            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
+                double totalDuration = media.getDuration().toSeconds();
+                double actualDuration = newValue.toSeconds();
+                double actualPercent = (100*actualDuration)/totalDuration;
+                String cssProperty = "-fx-background-color: linear-gradient(to right, #" + video.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+                slider.lookup(".track").setStyle(cssProperty);
+                if(slider.getValue() >= media.getDuration().toSeconds() - 0.5){
+                    slider.setValue(0);
+                    NextVideo();
+                }else{
+                    slider.setValue(newValue.toSeconds());
+                    actualDurationLabel.setText(String.valueOf((int)slider.getValue()));
+                }
+            }));
+            mediaPlayer.setOnReady(() -> {
+                Duration totalDuration = media.getDuration();
+                System.out.println(totalDuration);
+                maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
+                slider.setMax(totalDuration.toSeconds());
+                System.out.println(slider.getValue());
+            });
+            String urlIcono = video.getIconoVideo();
+            String urlIconoMedia = Directorio()+urlIcono;
+            System.out.println(urlIconoMedia);
+            Image image = new Image(urlIconoMedia);
+            iconoCancionImage.setImage(image);
+            nombreArtistaLabel.setText(video.getArtistaVideo());
+            nombreCancionLabel.setText(video.getNombreVideo());
+            Thread.sleep(500);
+            mediaPlayer.setAutoPlay(true);
       
         } catch (InterruptedException ex) {
                 ex.printStackTrace();
@@ -158,22 +167,21 @@ public class MediaController implements Initializable {
     public void NextVideo(){
             mediaPlayer.stop();
             slider.setValue(0);
-            Video nextVide;
             try {
-                nextVide = gestorvideo.getNextVideo();
-                String UrlString = nextVide.getURlVideo();
+                video = gestorvideo.getNextVideo();
+                String UrlString = video.getURlVideo();
                 String UrlMedia = Directorio()+UrlString;
-                Media NextMedia = new Media(UrlMedia);
-                mediaPlayer = new MediaPlayer(NextMedia);
+                media = new Media(UrlMedia);
+                mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.setVolume(volumen);
                 mediaView.setMediaPlayer(mediaPlayer);
                 mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
-                    double totalDuration = NextMedia.getDuration().toSeconds();
+                    double totalDuration = media.getDuration().toSeconds();
                     double actualDuration = newValue.toSeconds();
                     double actualPercent = (100*actualDuration)/totalDuration;
-                    String cssProperty = "-fx-background-color: linear-gradient(to right, #" + nextVide.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
+                    String cssProperty = "-fx-background-color: linear-gradient(to right, #" + video.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
                     slider.lookup(".track").setStyle(cssProperty);
-                    if(slider.getValue() >= NextMedia.getDuration().toSeconds() - 0.5){
+                    if(slider.getValue() >= media.getDuration().toSeconds() - 0.5){
                         slider.setValue(0);
                         NextVideo();
                     }else{
@@ -182,19 +190,19 @@ public class MediaController implements Initializable {
                     }
                 }));
                 mediaPlayer.setOnReady(() -> {
-                    Duration totalDuration = NextMedia.getDuration();
+                    Duration totalDuration = media.getDuration();
                     System.out.println(totalDuration);
                     maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
                     slider.setMax(totalDuration.toSeconds());
                     System.out.println(slider.getValue());
                 });
-                String urlIcono = nextVide.getIconoVideo();
+                String urlIcono = video.getIconoVideo();
                 String urlIconoMedia = Directorio()+urlIcono;
                 System.out.println(urlIconoMedia);
                 Image image = new Image(urlIconoMedia);
                 iconoCancionImage.setImage(image);
-                nombreArtistaLabel.setText(nextVide.getArtistaVideo());
-                nombreCancionLabel.setText(nextVide.getNombreVideo());
+                nombreArtistaLabel.setText(video.getArtistaVideo());
+                nombreCancionLabel.setText(video.getNombreVideo());
                 Thread.sleep(500);
                 mediaPlayer.setAutoPlay(true);
             } catch (ExcepcionesVideo ex) {
@@ -207,23 +215,21 @@ public class MediaController implements Initializable {
     public void PrevVideo(){
         mediaPlayer.stop();
         slider.setValue(0);
-        Video prevVideo;
         try{
-            prevVideo = gestorvideo.getPrevVideo();
-            String UrlString = prevVideo.getURlVideo();
+            video = gestorvideo.getPrevVideo();
+            String UrlString = video.getURlVideo();
             String UrlMedia = Directorio()+UrlString;
-            Media prevMedia = new Media(UrlMedia);
-            mediaPlayer = new MediaPlayer(prevMedia);
+            media = new Media(UrlMedia);
+            mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setVolume(volumen);
             mediaView.setMediaPlayer(mediaPlayer);
             mediaPlayer.currentTimeProperty().addListener(((observableValue, oldValue, newValue) -> {
-                double totalDuration = prevMedia.getDuration().toSeconds();
+                double totalDuration = media.getDuration().toSeconds();
                 double actualDuration = newValue.toSeconds();
                 double actualPercent = (100*actualDuration)/totalDuration;
-                String cssProperty = "-fx-background-color: linear-gradient(to right, #" + prevVideo.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
-                System.out.println(cssProperty);
+                String cssProperty = "-fx-background-color: linear-gradient(to right, #" + video.getColorVideo() + " " + String.format("%.0f", actualPercent) + "%, #969696 " + String.format("%.0f", actualPercent) + "%);";
                 slider.lookup(".track").setStyle(cssProperty);
-                if(slider.getValue() >= prevMedia.getDuration().toSeconds()- 0.5){
+                if(slider.getValue() >= media.getDuration().toSeconds()- 0.5){
                     slider.setValue(0);
                     NextVideo();
                 }
@@ -231,18 +237,18 @@ public class MediaController implements Initializable {
                 actualDurationLabel.setText(String.valueOf((int)slider.getValue()));
             }));
             mediaPlayer.setOnReady(() -> {
-                Duration totalDuration = prevMedia.getDuration();
+                Duration totalDuration = media.getDuration();
                 System.out.println(totalDuration);
                 maxDurationLabel.setText(String.valueOf((int)totalDuration.toSeconds()));
                 slider.setMax((int)totalDuration.toSeconds());
                 System.out.println(slider.getValue());
             });
-            String urlIcono = prevVideo.getIconoVideo();
+            String urlIcono = video.getIconoVideo();
             String urlIconoMedia = Directorio()+urlIcono;
             Image image = new Image(urlIconoMedia);
             iconoCancionImage.setImage(image);
-            nombreArtistaLabel.setText(prevVideo.getArtistaVideo());
-            nombreCancionLabel.setText(prevVideo.getNombreVideo());
+            nombreArtistaLabel.setText(video.getArtistaVideo());
+            nombreCancionLabel.setText(video.getNombreVideo());
             Thread.sleep(500);
             mediaPlayer.setAutoPlay(true);
         } catch (ExcepcionesVideo ex) {
