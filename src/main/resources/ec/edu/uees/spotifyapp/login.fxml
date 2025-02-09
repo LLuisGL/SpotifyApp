@@ -40,7 +40,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="223.0" prefWidth="420.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#Register" prefHeight="42.0" prefWidth="366.0" styleClass="button-sign-up-bg" text="Sign up free">
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="366.0" styleClass="button-sign-up-bg" text="Sign up free">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>

@@ -33,6 +33,12 @@ public class MediaController implements Initializable {
     @FXML
     private Label nombreCancionLabel;
     @FXML
+    private ImageView botonPlayStop;
+    @FXML
+    private ImageView subirVolumen;
+    @FXML
+    private ImageView bajarVolumen;
+    @FXML
     private Slider slider;
     @FXML
     private Label maxDurationLabel;
@@ -58,18 +64,37 @@ public class MediaController implements Initializable {
     public void subirVolumen(){
         if(volumen < 1){
             volumen = volumen + 0.1;
+            String urlImageSubir = Directorio()+"/src/main/resources/ec/edu/uees/spotifyapp/main/agregarPush.png";
+            Image subirPush = new Image(urlImageSubir);
+            subirVolumen.setImage(subirPush);
             mediaPlayer.setVolume(volumen);
         }
     }
+    @FXML
+    public void restIcoSubVolu(){
+        String urlImageSu = Directorio()+"/src/main/resources/ec/edu/uees/spotifyapp/main/agregar.png";
+        Image subir = new Image(urlImageSu);
+        subirVolumen.setImage(subir);
+    }    
+    
     
     @FXML
     public void bajarVolumen(){
         if(volumen > 0){
             volumen = volumen - 0.1;
+            String urlImageBajar = Directorio()+"/src/main/resources/ec/edu/uees/spotifyapp/main/menosPush.png";
+            Image bajarPush = new Image(urlImageBajar);
+            bajarVolumen.setImage(bajarPush);
             mediaPlayer.setVolume(volumen);
         }
     }
-    
+    @FXML
+    public void restIcoBajVolu(){
+        String urlImageBa = Directorio()+"/src/main/resources/ec/edu/uees/spotifyapp/main/menos.png";
+        Image bajar = new Image(urlImageBa);
+        bajarVolumen.setImage(bajar);
+    }    
+     
     @FXML
     public void dragWindow(MouseEvent event){
         Stage stage = (Stage) principalStackPane.getScene().getWindow();
@@ -95,10 +120,16 @@ public class MediaController implements Initializable {
         if(isPaused)
         {
            mediaPlayer.play();
+           String urlImagePL = Directorio()+"/src/main/resources/ec/edu/uees/spotifyapp/main/pause_1.png"; 
+           Image imagePause = new Image(urlImagePL); 
+           botonPlayStop.setImage(imagePause);
            isPaused = false;
         }
         else{
             mediaPlayer.pause();
+            String urlImagePS = Directorio()+"/src/main/resources/ec/edu/uees/spotifyapp/main/play_3.png";
+            Image imagePause = new Image(urlImagePS); 
+            botonPlayStop.setImage(imagePause);
             isPaused = true;
         }       
     }
