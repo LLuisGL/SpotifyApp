@@ -1,0 +1,23 @@
+.background-general{
+    -fx-background-color: #ffffff;
+}
+.background-turn{
+    -fx-background-color: #ffffff;
+    -fx-border-color: rgb(138, 138, 188) ;
+    -fx-border-width: 2;
+}
+.background-turn-number{
+    -fx-background-color: #282828;
+}
+.buttons{
+    -fx-background-color: #323232;
+    -fx-background-radius: 3;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+.buttons:hover{
+    -fx-background-color: #2c2c2c;
+}
+.background-buttons{
+    -fx-background-color: rgb(69, 69, 69);
+}
