@@ -11,7 +11,6 @@ import java.util.ListIterator;
  */
 public class DoubleLinkedCircleList<E> implements Lista<E>{
     private Node<E> first;
-    private Node<E> last;
     private int current;
 
     
@@ -36,14 +35,14 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
         }
 
         if(this.isEmpty()){
-            first = last = p;
+            first = p;
         }
         
-        p.next = last.next; // el nuevo nodo apunta al inicio 
-        first.prev = p; // el previo del nodo inicial va a apuntar al nuevo nodo
-        last.next = p; // el que en ese momento es el ultimo nodo va a apuntar ahora al nuevo nodo
-        p.prev = last; // el previo del nuevo nodo apuntara al que es el ultimo en ese momento
-        last = p; // ahora el ultimo sera el nodo ingresado
+        p.prev = first; // el previo del nuevo nodo apuntara a el ultimo nodo existente
+        p.next= first.next; // el next del nuevo nodo apuntara al inicio
+        first.next.prev = p; // el previo del primer nodo apunta al nuevo nodo 
+        first.next = p; // el que era el ultimo no apuntara al nuevo nodo 
+        first = p; // el nuevo nodo ahora es el ultimo
         current++;
         return true;       
     }
@@ -55,13 +54,12 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
             return false;
         }
         if(this.isEmpty()){
-            first = last = p;
+            first = p;
         }
-        p.prev = first.prev; // el nuevo nodo apuntara a la misma direccion que el previo del primero
-        first.prev = p; // ahora el previo apuntara a el nuevo nodo
-        p.next = first;// el next del nuevo nodo apuntara a p
-        last.next = p; // el next del ultimo nodo apuntara a p
-        first = p; // ahora el primero nodo sera p,,
+        p.next = first.next; // esto hace que el nuevo nodo apunte al inicio
+        p.prev = first.next.prev;// esto hace que el prev del nuevo nodo apunte al final 
+        first.next.prev= p;
+        first.prev = p;
         current++;
         return true;
     }
@@ -72,15 +70,14 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
             return null;
         }
         if (current == 1){
-            first= last = null;
+            first= null;
         }
-        E tmp = first.data; // aseguramos el dato del primer elemento para devolver
-        last.next = first.next; // el next del ultimo nodo va a apuntar al next del primer nodo
-        first.next.prev = first.prev; // el prev del next del primer nodo apuntara donde apunta el prev del primero nodo
-        first.prev = null; //desconectamos el prev del  primer arreglo
-        Node<E> tmp1 = first; // creamos un nodo que se situara en la ubicacion
-        first = first.next; // ahora se ajusta el nodo siguiente como first
-        tmp1.next = null; // desconectamos el nodo que era first del arreglo
+        E tmp = first.next.data;
+        first.next = first.next.next;
+        Node<E> tmp1 = first.next.prev;
+        first.next.prev = tmp1.prev;
+        tmp1.next = null;
+        tmp1.prev = null; 
         current--;
         return tmp; 
     }
@@ -91,15 +88,15 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
             return null;
         }
         if (current == 1){
-            first= last = null;
+            first = null;
         }
-        E tmp = last.data; // resguardamos los datos del ultimo nodo
-        last.prev.next = last.next; // usamos el nodo previo para que apunte al nodo inicial
-        last.next =null; // ahora el next del ultimo para desconectar
-        first.prev = last.prev; // ahora el previo del primero apuntara al previo del ultimo
-        Node<E> tmp1 = last; // se crea un nodo tmp que se situara en el ultimo nodo
-        last = last.prev; // ahora el nodo previo sera el ultimo
-        tmp1.prev =null; // desde el nodo tmp se desconectara la ultima referencia 
+        E tmp = first.data;
+        first.next.prev = first.prev;
+        first.prev.next = first.next;
+        first.next = null;
+        Node<E> tmp1 = first;
+        first = first.prev;
+        tmp1.prev = null;
         current--;
         return tmp;
     }
@@ -119,7 +116,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
 
     @Override
     public boolean isEmpty() {
-        Boolean validacion = (first == null && last == null);
+        Boolean validacion = (first == null);
         return validacion;  
     }
 
@@ -201,7 +198,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
             throw new IndexOutOfBoundsException("No existe el indice");
         }
         int indNode = 0;
-        Node<E> comp = first;
+        Node<E> comp = first.prev;
         for(int i= 0; i<current; i++){
             if(comp.data.equals(e)){
                 return indNode;
@@ -213,7 +210,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
     }
     
     private Node<E> SetUbicacion(int Index){
-        Node<E> NodeUbi = first;
+        Node<E> NodeUbi = first.next;
         for(int i= 0 ; i<Index;i++){
             NodeUbi = NodeUbi.next; // Este metodo nos permite situarnos un nodo antes del que nos pide el usuario, y el next no lleva al solicitado.
         }
@@ -222,7 +219,7 @@ public class DoubleLinkedCircleList<E> implements Lista<E>{
     
     public ListIterator<E> listIterator(){
         ListIterator<E> listI = new ListIterator<E>(){
-            Node<E> traveler = first;
+            Node<E> traveler = first.next;
             int initial_index = 0;
             
             @Override

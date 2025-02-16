@@ -28,23 +28,7 @@ public class GestorVideo {
         
         VideoIterator = ListaVideo.listIterator();
     }
-    
-// metodo que permitira agregar un nuevo video al arreglo
-    public void addVideo(Video VI){
-        ListaVideo.addLast(VI);
-    }
-   
-    // metodo que permite eliminar un video del arreglo
-    public void removeVideo(Video vR) throws ExcepcionesVideo{
-        Boolean verificacion = ListaVideo.contains(vR);
-        if(verificacion){
-            int indexRemove = ListaVideo.getIndex(vR);
-            ListaVideo.remove(indexRemove);
-        }
-        else{
-           throw new ExcepcionesVideo("Video No econtrado");
-        }
-    }
+ 
     // metodo que avanzara al siguiente video
     public Video getNextVideo() throws ExcepcionesVideo{
         if (VideoIterator.hasNext()){

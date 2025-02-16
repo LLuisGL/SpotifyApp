@@ -17,7 +17,6 @@
 }
 
 .main-nav-bar{
-    backdrop-filter: blur(10px);
     -fx-background-color: linear-gradient(to top, #1e1e1e, #30303000);
 }
 
@@ -29,10 +28,10 @@
 }
 
 .music-initial-pop-up{
+    -fx-background-color: #8e26e9;
     -fx-background-color: rgb(82, 128, 182);
     -fx-background-radius: 5;
 }
 .music-nav-bar{
-    backdrop-filter: blur(10px);
     -fx-background-color: linear-gradient(to top, #000000, #22222200);
 }
