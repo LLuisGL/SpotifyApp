@@ -6,20 +6,19 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import Video.GestorVideo;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -44,14 +43,17 @@ public class MediaController implements Initializable {
     private Label maxDurationLabel;
     @FXML
     private Label actualDurationLabel;
-    
+    @FXML
+    private VBox turnoVBox;
+    @FXML
+    private Label labelTurnoNuevo;
+    ThreadTurno tt;
     
     private GestorVideo gestorvideo = new GestorVideo();
     private Video video;
     private Media media;
     private MediaPlayer mediaPlayer;
     private boolean isPaused = true;
-    
     
     private double x = 0;
     private double y = 0;
@@ -289,6 +291,22 @@ public class MediaController implements Initializable {
         }
     }
     
+    @FXML
+    public void siguienteTurno(){
+        tt = new ThreadTurno(this, labelTurnoNuevo, turnoVBox);
+        Thread newThread = new Thread(tt);
+        newThread.start();
+    }
+    
+    public void modificarVol(double volumeToDown){
+        volumen = volumen + volumeToDown;
+        mediaPlayer.setVolume(volumen);
+        System.out.println(volumen);
+    }
+    
+    public double getVolumen(){
+        return this.volumen;
+    }
     @FXML
     public void switchToMain(){
         try {
