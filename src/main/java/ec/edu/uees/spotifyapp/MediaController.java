@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import Video.GestorVideo;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -47,6 +48,10 @@ public class MediaController implements Initializable {
     private VBox turnoVBox;
     @FXML
     private Label labelTurnoNuevo;
+    @FXML
+    private Button sigTurnoBtn;
+    @FXML
+    private MediaView turnAlert;
     ThreadTurno tt;
     
     private GestorVideo gestorvideo = new GestorVideo();
@@ -293,12 +298,14 @@ public class MediaController implements Initializable {
     
     @FXML
     public void siguienteTurno(){
-        tt = new ThreadTurno(this, labelTurnoNuevo, turnoVBox);
+        tt = new ThreadTurno(this, labelTurnoNuevo, turnoVBox, turnAlert, sigTurnoBtn);
         Thread newThread = new Thread(tt);
         newThread.start();
     }
     
     public void modificarVol(double volumeToDown){
+        System.out.println("volumen: " + volumen);
+        System.out.println("bajar: " + volumeToDown);
         volumen = volumen + volumeToDown;
         mediaPlayer.setVolume(volumen);
         System.out.println(volumen);
@@ -323,7 +330,7 @@ public class MediaController implements Initializable {
         mediaPlayer.seek(Duration.seconds(slider.getValue()));
     }
     
-    private String Directorio(){
+    public String Directorio(){
         String userDir = System.getProperty("user.dir");
         userDir = userDir.replace("\\", "/");
         File archivo = new File(userDir);

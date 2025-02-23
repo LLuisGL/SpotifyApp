@@ -250,7 +250,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#siguienteTurno" styleClass="buttons" text="Siguiente turno">
+                  <Button fx:id="sigTurnoBtn" mnemonicParsing="false" onAction="#siguienteTurno" styleClass="buttons" text="Siguiente turno">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -269,6 +269,7 @@
                   </Label>
                </children>
             </VBox>
+            <MediaView fx:id="turnAlert" />
          </children>
       </VBox>
    </children>
