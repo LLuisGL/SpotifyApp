@@ -1,5 +1,6 @@
 package ec.edu.uees.spotifyapp;
 
+import User.GestionPaciente;
 import Video.ExcepcionesVideo;
 import Video.Video;
 import java.io.File;
@@ -20,8 +21,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class MediaController implements Initializable {
     @FXML
@@ -53,7 +58,10 @@ public class MediaController implements Initializable {
     @FXML
     private MediaView turnAlert;
     ThreadTurno tt;
+    private static Scene scene;
+    private static Stage stage;
     
+    private GestionPaciente gestorPac = new GestionPaciente(); 
     private GestorVideo gestorvideo = new GestorVideo();
     private Video video;
     private Media media;
@@ -337,7 +345,34 @@ public class MediaController implements Initializable {
         String newURI = archivo.toURI().toString();
      return newURI;   
     }
+    
+    // ir a registrar usuario
+    @FXML
+    public void switchToRegistroPaciente(){
+        try {
+            if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer = null;
+            }
+        
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegistrarPaciente.fxml"));
+            Parent root = fxmlLoader.load();
 
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Gestión de paciente");
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    // Parte de los turnos
+    
+    
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         IniciarVideo();
