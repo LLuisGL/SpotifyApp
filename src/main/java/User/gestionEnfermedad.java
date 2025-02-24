@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Carlos Auqui
  */
 public class gestionEnfermedad {
-    Enfermedad enfermedad1 = new Enfermedad("Infarto agudo de miocardio",1);
+    /*Enfermedad enfermedad1 = new Enfermedad("Infarto agudo de miocardio",1);
     Enfermedad enfermedad2 = new Enfermedad("Accidente cerebrovascular",1);
     Enfermedad enfermedad3 = new Enfermedad("Neumonía grave",2);
     Enfermedad enfermedad4 = new Enfermedad("Meningitis bacteriana",2);
@@ -27,9 +27,10 @@ public class gestionEnfermedad {
     Enfermedad enfermedad7 = new Enfermedad("Asma moderada",4);
     Enfermedad enfermedad8 = new Enfermedad("Hipertensión arterial controlada",4);
     Enfermedad enfermedad9 = new Enfermedad("Resfriado común",5);
-    Enfermedad enfermedad10 = new Enfermedad("Gastritis",5);
+    Enfermedad enfermedad10 = new Enfermedad("Gastritis",5);*/
     
     ArrayList<Enfermedad> listaEnfermedades = new ArrayList<Enfermedad>();
+    
     
    /* public gestionEnfermedad(){
         listaEnfermedades.add(enfermedad1);
@@ -75,10 +76,11 @@ public class gestionEnfermedad {
        try{
         FileInputStream objetoFile = new FileInputStream(Directorio()+"/archivos/enfermedades.dat");
         ObjectInputStream ois = new ObjectInputStream(objetoFile);
-        do{ 
+         
+        while(objetoFile.available() > 0){
             Enfermedad enf = (Enfermedad) ois.readObject();
             listaEnfe.add(enf);
-        }while(ois.readObject() != null);
+       }
         ois.close();
         System.out.println("Archivo leído correctamente. Total de enfermedades: " + listaEnfe.size());
 
@@ -88,5 +90,28 @@ public class gestionEnfermedad {
            e.printStackTrace();   
        }
        return listaEnfe;
+    }
+    
+    public Enfermedad returnEnfermedad(String enfSelect){
+      Enfermedad enfermedadSelecionada = null; 
+      try{
+        FileInputStream objetoFile = new FileInputStream(Directorio()+"/archivos/enfermedades.dat");
+        ObjectInputStream ois = new ObjectInputStream(objetoFile);         
+        while(objetoFile.available() > 0){
+            Enfermedad enf = (Enfermedad) ois.readObject();
+            System.out.println(enf.getNombreEnfermedad());
+            if(enf.getNombreEnfermedad().equals(enfSelect)){
+               enfermedadSelecionada = enf;
+            }
+        }
+         ois.close();
+          
+      }catch(IOException e){
+           e.printStackTrace();
+       }catch(ClassNotFoundException e){
+           e.printStackTrace();   
+       }
+        System.out.println(enfermedadSelecionada.nombreEnfermedad);
+      return enfermedadSelecionada;
     }
 }

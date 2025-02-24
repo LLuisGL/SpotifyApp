@@ -169,7 +169,7 @@
                               <Font name="System Bold" size="35.0" />
                            </font>
                         </Label>
-                        <Label text="004" textFill="WHITE">
+                        <Label fx:id="labelPrimerTurno" text="004" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="96.0" />
                            </font>
@@ -262,7 +262,7 @@
             </HBox>
             <VBox fx:id="turnoVBox" opacity="0.0" prefHeight="1.0" prefWidth="410.0" scaleX="0.95" scaleY="22.0" styleClass="background-turn-number" translateY="-375.0">
                <children>
-                  <Label fx:id="labelTurnoNuevo" scaleX="16.0" scaleY="0.8" text="000" textFill="WHITE" translateX="190.0">
+                  <Label scaleX="16.0" scaleY="0.8" text="000" textFill="WHITE" translateX="190.0">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

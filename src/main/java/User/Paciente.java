@@ -9,23 +9,24 @@ package User;
  * @author Carlos Auqui
  */
 public class Paciente implements Comparable<Paciente> {
-    int id;
+    String id;
     String nombrePacie;
     Enfermedad enfermedad;
 
-    public Paciente(int id, String nombrePacie, Enfermedad enfermedad) {
+    public Paciente(String id, String nombrePacie, Enfermedad enfermedad) {
         this.id = id;
         this.nombrePacie = nombrePacie;
         this.enfermedad = enfermedad;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
+
     
     public String getNombrePacie() {
         return nombrePacie;

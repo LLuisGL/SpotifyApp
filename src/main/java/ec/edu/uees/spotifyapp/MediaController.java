@@ -1,6 +1,8 @@
 package ec.edu.uees.spotifyapp;
 
+import ColaPrioridad.colaPacientePrio;
 import User.GestionPaciente;
+import User.Paciente;
 import Video.ExcepcionesVideo;
 import Video.Video;
 import java.io.File;
@@ -13,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import Video.GestorVideo;
+import java.util.PriorityQueue;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -52,7 +55,14 @@ public class MediaController implements Initializable {
     @FXML
     private VBox turnoVBox;
     @FXML
-    private Label labelTurnoNuevo;
+    private Label labelPrimerTurno;
+    @FXML
+    private Label labelSegundoTurno;
+    @FXML
+    private Label labelTercerTurno;
+    @FXML
+    private Label labelCuartoTurno;
+    
     @FXML
     private Button sigTurnoBtn;
     @FXML
@@ -61,6 +71,8 @@ public class MediaController implements Initializable {
     private static Scene scene;
     private static Stage stage;
     
+    private RegistroController regisController = new RegistroController();
+    private colaPacientePrio gestioPacPrio = new colaPacientePrio();
     private GestionPaciente gestorPac = new GestionPaciente(); 
     private GestorVideo gestorvideo = new GestorVideo();
     private Video video;
@@ -306,7 +318,7 @@ public class MediaController implements Initializable {
     
     @FXML
     public void siguienteTurno(){
-        tt = new ThreadTurno(this, labelTurnoNuevo, turnoVBox, turnAlert, sigTurnoBtn);
+        tt = new ThreadTurno(this, labelPrimerTurno, turnoVBox, turnAlert, sigTurnoBtn);
         Thread newThread = new Thread(tt);
         newThread.start();
     }
@@ -345,14 +357,13 @@ public class MediaController implements Initializable {
         String newURI = archivo.toURI().toString();
      return newURI;   
     }
-    
+    // ------------------------------------------------------------------------------------------------------------------------------- 
     // ir a registrar usuario
     @FXML
     public void switchToRegistroPaciente(){
         try {
             if (mediaPlayer != null) {
             mediaPlayer.stop();
-            mediaPlayer = null;
             }
         
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegistrarPaciente.fxml"));
@@ -361,12 +372,23 @@ public class MediaController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Gestión de paciente");
+            stage.setOnHidden(event -> rellerLabelsTurnos()); // cuando cierre la ventana sucedera este evento
             stage.show();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
     // Parte de los turnos
+    public void rellerLabelsTurnos(){
+         System.out.println("Hola");
+         if(regisController.ActualizarLabel().getText() == "Pac00"){
+             labelPrimerTurno.setText("Pac00");
+         }else{
+             labelPrimerTurno.setText(regisController.ActualizarLabel().getText());
+         }
+        
+    }    
+    
     
     
     private static Parent loadFXML(String fxml) throws IOException {
@@ -376,6 +398,6 @@ public class MediaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         IniciarVideo();
-        
+        rellerLabelsTurnos();
     }
 }

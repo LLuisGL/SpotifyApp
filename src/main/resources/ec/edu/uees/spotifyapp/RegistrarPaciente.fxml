@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -13,26 +14,27 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="ID" />
-            <TextField />
+            <TextField fx:id="txtId" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Nombre" />
-            <TextField />
+            <TextField fx:id="txtNombre" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Enfermedad" />
-            <ComboBox fx:id="Enfermedades" prefWidth="150.0" />
+            <ComboBox fx:id="cmbEnfermedades" prefWidth="150.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Crear" />
-            <Button mnemonicParsing="false" text="Volver " />
+            <Button mnemonicParsing="false" onAction="#crearPaciente" text="Crear" />
+            <Button fx:id="regresar" mnemonicParsing="false" onAction="#switchToMain" text="Volver " />
          </children>
       </HBox>
+      <Accordion />
    </children>
 </VBox>

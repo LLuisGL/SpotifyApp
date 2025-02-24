@@ -32,5 +32,8 @@ public class colaPacientePrio {
        return sgtPaciente;
     }
     
+    public PriorityQueue<Paciente> returnQueue(){
+    return pacientePrioritario;
+    }    
     
 }

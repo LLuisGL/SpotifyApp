@@ -13,10 +13,16 @@ import java.util.LinkedList;
 public class GestionPaciente {
     LinkedList<Paciente> listaPaciente = new LinkedList<>();
     
-    public Paciente crearPaciente( int id, String nombre, Enfermedad enf){
-        if(id <=0){
+    public Paciente crearPaciente( String id, String nombre, Enfermedad enf){
+        String IdPacienteF; // formato del paciente
+        
+        if(Integer.valueOf(id) <=0){
             System.out.println("id invalido");
             return null;
+        }else{
+            String formatId = "Pac0";
+            String stID = formatId+id; // esto convierte el ide de 1 a pac01
+            IdPacienteF = stID;
         }
         if(nombre == "" || nombre == " "){
             System.out.println("datos invalidos");
@@ -26,7 +32,9 @@ public class GestionPaciente {
             System.out.println("Enfermedad Nula");
             return null;
         }
-        Paciente pacIng = new Paciente(id, nombre,enf);
+        
+        
+        Paciente pacIng = new Paciente(IdPacienteF, nombre,enf);
         return pacIng;
     }
 
